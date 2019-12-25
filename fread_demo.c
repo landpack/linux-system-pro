@@ -13,16 +13,14 @@ main(int argc, char *argv[])
 	FILE *fptr;
 	struct threeNumber number;
 
-	if((fptr = fopen("test.bin", "wb")) == NULL ){
+	if((fptr = fopen("test.bin", "rb")) == NULL ){
 		fprintf(stderr, "Openning failure!\n");
 		exit(EXIT_FAILURE);
 	}
 
 	for (num  = 1; num < 5; num ++){
-		number.num1 = num;
-		number.num2 = num * 2;
-		number.num3 = num * num;		
-		fwrite(&number, sizeof(struct threeNumber), 1, fptr);
+		fread(&number, sizeof(struct threeNumber), 1, fptr);
+		printf("num1=%d\tnum2=%d\tnum3=%d\n", number.num1, number.num2, number.num3);
 	}
 
 	fclose(fptr);
